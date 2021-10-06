@@ -13,11 +13,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/home/internette/Documents/Y2S1_2021/OOP_Assmt/OOP_Assmt.csproj",
+      "projectUniqueName": "/home/internette/Documents/Y2S1_2021/CAB201_n10869107_OOP/OOP_Assmt.csproj",
       "projectName": "OOP_Assmt",
-      "projectPath": "/home/internette/Documents/Y2S1_2021/OOP_Assmt/OOP_Assmt.csproj",
+      "projectPath": "/home/internette/Documents/Y2S1_2021/CAB201_n10869107_OOP/OOP_Assmt.csproj",
       "packagesPath": "/home/internette/.nuget/packages/",
-      "outputPath": "/home/internette/Documents/Y2S1_2021/OOP_Assmt/obj/",
+      "outputPath": "/home/internette/Documents/Y2S1_2021/CAB201_n10869107_OOP/obj/",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "/home/internette/.nuget/NuGet/NuGet.Config"

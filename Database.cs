@@ -16,22 +16,22 @@ namespace AppDB
         public void Register()
         {
             // Prompts user for input and creates a User instance with the provided info
-            Console.WriteLine("\nFull name: ");
+            Console.Write("\nFull name: ");
             string inputName = Console.ReadLine();
 
-            Console.WriteLine("\nEmail: ");
+            Console.Write("\nEmail: ");
             string inputEmail = Console.ReadLine();
 
             string inputPwd = UserInterface.GetPassword("\nPassword");
 
-            Console.WriteLine("\nAddress: ");
+            Console.Write("\nAddress: ");
             string inputAddress = Console.ReadLine();
 
             Client newClient = new Client(inputName, inputEmail, inputPwd, inputAddress);
 
             clientData.Add(newClient);
 
-            Console.WriteLine($"\nNew client {newClient.name} ({newClient.email}) registered.\nLet's get auctioning!");
+            Console.Write($"\nNew client {newClient.name} ({newClient.email}) registered.\nLet's get auctioning!\n");
         }
 
         public void Login()
@@ -44,7 +44,7 @@ namespace AppDB
 
             while (loginAttempt)
             {
-                Console.WriteLine("\nEmail: ");
+                Console.Write("\nEmail: ");
                 string loginEmail = Console.ReadLine();
 
                 // Checks each entry in user list, if email matches, give password prompt.
