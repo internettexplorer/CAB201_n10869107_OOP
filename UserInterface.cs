@@ -1,8 +1,8 @@
- using System;
+using System;
 using System.Text;
 using System.Collections.Generic;
 
-namespace UserInterfaceUtils {
+namespace UI {
 
 	/// <summary>
 	/// A collection of static utility methods which implement a simple text-based

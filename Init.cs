@@ -1,14 +1,13 @@
 using System;
 
-using AppDB;
 using Clients;
-using UserInterfaceUtils;
+using UI;
 
 namespace InitialiseApp
 {
     public class App
     {
-        Database session = new Database();
+        ClientManager clientManager = new ClientManager();
 
         public void StartMenu()
         {
@@ -25,6 +24,7 @@ namespace InitialiseApp
             Console.WriteLine("\n");
 
             bool running = true;
+
             while (running) 
             {
                 int option = UserInterface.GetOption("\nPlease select one of the following",
@@ -35,18 +35,23 @@ namespace InitialiseApp
                 switch (option)
                 {
                     case REGISTER:
-                        session.Register();
+                        clientManager.Register();
                         break;
 
                     case LOGIN:
-                        session.Login();
-                        if (session.clientLoggedIn == true)
+                        clientManager.Login();
+                        if (clientManager.clientLoggedIn == true)
                         {
                             ClientMenu();
                         }
+                        // else
+                        // {
+                        //     continue;
+                        // }
                         break;
     
                     case EXIT:
+                        Console.WriteLine("Thank you for using Auctioneer!");
                         running = false;
                         break;
 
@@ -62,8 +67,7 @@ namespace InitialiseApp
             bool client_running = true;
             while (client_running)
             {
-                Console.WriteLine("\n");
-                int clientOption = UserInterface.GetOption("\nMake a selection",
+                int clientOption = UserInterface.GetOption("\nProceed by choosing from the following:",
                     "Advertise a product", "Search for a product", "Make a bid", "View my products for sale", "View bids on my products",
                     "Sell a product", "Logout"
                     );
@@ -71,20 +75,24 @@ namespace InitialiseApp
                 switch (clientOption)
                 {
                     case ADVERTISE_PROD:
+                        // Product.Advertise();
                         Console.Write("Ad success");
                         
-                        foreach (var client in session.clientData)
+                        foreach (var client in clientManager.clientData)
                         {
                             Console.WriteLine($"\n{client.name}\n{client.email}");
                         }
                         break;
                     case SEARCH_PROD:
+                        // Product.Search();
                         Console.Write("Search success");
                         break;
-                    case MAKE_BID: 
+                    case MAKE_BID:
+                        // Product.Bid();
                         Console.Write("Bid success");
                         break;
                     case PROD_LIST:
+                        // Product.List();
                         Console.Write("Prod list success");
                         break;
                     case BID_LIST:
@@ -94,8 +102,11 @@ namespace InitialiseApp
                         Console.Write("Sell success");
                         break;
                     case LOGOUT:
-                        Console.WriteLine("Logging out...");
-                        StartMenu();
+                        Console.Clear();
+                        Console.WriteLine("\nLogging out...");
+                        clientManager.clientLoggedIn = false;
+                        client_running = false;
+                        //StartMenu();
                         break;
                     default: break;
                 }

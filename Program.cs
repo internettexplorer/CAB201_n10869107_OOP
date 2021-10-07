@@ -1,5 +1,4 @@
 ﻿using System;
-
 using InitialiseApp;
 
 namespace Main
@@ -9,7 +8,6 @@ namespace Main
         static void Main(string[] args)
         {
             App main = new App();
-
             main.StartMenu();
         }
     }
