@@ -15,6 +15,8 @@ namespace Products
             this.type = type;
             this.initialCost = initialCost;
         }
+
+        
         
     }
 }
