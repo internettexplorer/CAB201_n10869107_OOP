@@ -32,8 +32,8 @@ namespace Clients
     {
         // Storage of User class instances 
         public List<Client> clientData = new List<Client>();
-
         public Client currentClient;
+        public int index;
 
         public void Register()
         {
@@ -61,7 +61,6 @@ namespace Clients
 
         public void Login()
         {
-            // Prompts user for email and pwd, with validation at each step
             string EMAIL_ERR = "Email not registered, please try again";
             string PWD_ERR = "Wrong password, please try again";
 
@@ -74,31 +73,33 @@ namespace Clients
 
                 string loginPwd = UserInterface.GetPassword("Password");
 
-                foreach (var client in clientData)
+                // Attempts to find the index of the user email input in the clientData
+                // list, if email does not exist/is incorrect print error message.
+                // Stores the current Client instance in a variable if a match is found and
+                // exits the loop.
+                try
                 {
-                    if (loginEmail == client.email && loginPwd == client.pwd)
+                    index = clientData.FindIndex(c => c.email.Equals(loginEmail, StringComparison.Ordinal));
+                    currentClient = clientData[index];
+                    
+                    if (loginEmail == currentClient.email && loginPwd == currentClient.pwd)
                     {
                         Console.Clear();
-                        Console.WriteLine($"Welcome back, {client.name}");
-
-                        int index = clientData.FindIndex(c => c.email.Equals(loginEmail, StringComparison.Ordinal));
-
-                        currentClient = clientData[index];
-                        Console.WriteLine($"{currentClient}");
+                        Console.WriteLine($"Welcome back {currentClient.name}");
+                        Console.WriteLine($"{currentClient.name}: {index}"); // debugging purposes
 
                         currentClient.loggedIn = true;
+                        
                         loginAttempt = false;
-                    }
-                    else if (loginEmail != client.email)
-                    {
-                        Console.WriteLine(EMAIL_ERR);
-                        continue;
                     }
                     else
                     {
-                        Console.WriteLine(PWD_ERR);
-                        continue;
+                        Console.Write(PWD_ERR);
                     }
+                }
+                catch (ArgumentOutOfRangeException)
+                {
+                    Console.Write(EMAIL_ERR);
                 }
             }
         }

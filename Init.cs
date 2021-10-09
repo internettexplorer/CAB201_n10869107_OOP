@@ -33,7 +33,6 @@ namespace InitialiseApp
                     "Register", "Login", "Exit"
                 );
 
-            
                 switch (option)
                 {
                     case REGISTER:
@@ -42,10 +41,12 @@ namespace InitialiseApp
 
                     case LOGIN:
                         clientManager.Login();
+
                         if (clientManager.currentClient.loggedIn == true)
                         {
                             ClientMenu();
                         }
+
                         break;
     
                     case EXIT:
@@ -96,7 +97,7 @@ namespace InitialiseApp
                     case LOGOUT:
                         Console.Clear();
 
-                        Console.WriteLine("\nLogging out...");
+                        Console.WriteLine($"\nLogging out...User {clientManager.currentClient.name}");
 
                         clientManager.currentClient.loggedIn = false;
                         client_running = false;
