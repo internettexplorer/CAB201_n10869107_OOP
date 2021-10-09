@@ -1,6 +1,7 @@
 using System;
 
 using Clients;
+using Products;
 using UI;
 
 namespace InitialiseApp
@@ -8,6 +9,7 @@ namespace InitialiseApp
     public class App
     {
         ClientManager clientManager = new ClientManager();
+        ProductManager productManager = new ProductManager();
 
         public void StartMenu()
         {
@@ -40,14 +42,10 @@ namespace InitialiseApp
 
                     case LOGIN:
                         clientManager.Login();
-                        if (clientManager.clientLoggedIn == true)
+                        if (clientManager.currentClient.loggedIn == true)
                         {
                             ClientMenu();
                         }
-                        // else
-                        // {
-                        //     continue;
-                        // }
                         break;
     
                     case EXIT:
@@ -75,13 +73,7 @@ namespace InitialiseApp
                 switch (clientOption)
                 {
                     case ADVERTISE_PROD:
-                        // Product.Advertise();
-                        Console.Write("Ad success");
-                        
-                        foreach (var client in clientManager.clientData)
-                        {
-                            Console.WriteLine($"\n{client.name}\n{client.email}");
-                        }
+                        productManager.Advertise();
                         break;
                     case SEARCH_PROD:
                         // Product.Search();
@@ -103,8 +95,10 @@ namespace InitialiseApp
                         break;
                     case LOGOUT:
                         Console.Clear();
+
                         Console.WriteLine("\nLogging out...");
-                        clientManager.clientLoggedIn = false;
+
+                        clientManager.currentClient.loggedIn = false;
                         client_running = false;
                         //StartMenu();
                         break;

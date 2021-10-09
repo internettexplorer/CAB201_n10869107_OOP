@@ -7,12 +7,13 @@ namespace Clients
 {
     public class Client
     {
+        
         public string name {get; set;}
         public string email {get; set;}
         public string pwd {get; set;}
         public string address {get; set;}
+        public Guid clientID {get; private set;}
 
-        //public int id {get; set;}
         public bool loggedIn;
     
         // eventually want to have support for products and bid (classes?) in this class
@@ -23,6 +24,7 @@ namespace Clients
             this.email = email;
             this.pwd = pwd;
             this.address = address;
+            this.clientID = Guid.NewGuid();
         }  
     }
 
@@ -31,9 +33,7 @@ namespace Clients
         // Storage of User class instances 
         public List<Client> clientData = new List<Client>();
 
-        public bool clientLoggedIn = false;
-
-        public int index;
+        public Client currentClient;
 
         public void Register()
         {
@@ -56,6 +56,7 @@ namespace Clients
             Console.Clear();
 
             Console.Write($"\nNew client {newClient.name} ({newClient.email}) registered.\nLet's get auctioning!\n");
+            Console.WriteLine($"Your GUID is {newClient.clientID.ToString()}");
         }
 
         public void Login()
@@ -71,42 +72,36 @@ namespace Clients
                 Console.Write("\nEmail: ");
                 string loginEmail = Console.ReadLine();
 
-                // Checks each entry in user list, if email matches, give password prompt.
-                // If no match found, prompt for email again
+                string loginPwd = UserInterface.GetPassword("Password");
+
                 foreach (var client in clientData)
                 {
-                    if (loginEmail == client.email)
+                    if (loginEmail == client.email && loginPwd == client.pwd)
                     {
-                        // Checks if password matches any entry in user list
-                        // If a match is found, welcome user with their name, otherwise
-                        // sends them back to the email prompt
+                        Console.Clear();
+                        Console.WriteLine($"Welcome back, {client.name}");
 
-                        string loginPwd = UserInterface.GetPassword("Password");
+                        int index = clientData.FindIndex(c => c.email.Equals(loginEmail, StringComparison.Ordinal));
 
-                        foreach (var clientpwd in clientData)
-                        {
-                            if (loginPwd == clientpwd.pwd)
-                            {
-                                Console.Clear();
-                                Console.WriteLine($"\nWelcome back, {clientpwd.name}");
+                        currentClient = clientData[index];
+                        Console.WriteLine($"{currentClient}");
 
-                                clientLoggedIn = true;
-                                loginAttempt = false;
-                            }
-                            else
-                            {
-                                Console.WriteLine(PWD_ERR);
-                            }
-                        }
+                        currentClient.loggedIn = true;
+                        loginAttempt = false;
                     }
-                    else
+                    else if (loginEmail != client.email)
                     {
                         Console.WriteLine(EMAIL_ERR);
                         continue;
                     }
+                    else
+                    {
+                        Console.WriteLine(PWD_ERR);
+                        continue;
+                    }
                 }
             }
+        }
 
-        } 
-    }
+    } 
 }
