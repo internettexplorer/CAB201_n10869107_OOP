@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 
 using Clients;
 using Products;
@@ -6,6 +7,13 @@ using UI;
 
 namespace InitialiseApp
 {
+    public static class Session
+    {
+        public static List<Client> clientData = new List<Client>();
+        public static List<Product> productList = new List<Product>();
+        public static Client currentClient;
+
+    }
     public class App
     {
         ClientManager clientManager = new ClientManager();
@@ -42,7 +50,7 @@ namespace InitialiseApp
                     case LOGIN:
                         clientManager.Login();
 
-                        if (clientManager.currentClient.loggedIn == true)
+                        if (Session.currentClient.loggedIn == true)
                         {
                             ClientMenu();
                         }
@@ -97,9 +105,9 @@ namespace InitialiseApp
                     case LOGOUT:
                         Console.Clear();
 
-                        Console.WriteLine($"\nLogging out...User {clientManager.currentClient.name}");
+                        Console.WriteLine($"\nLogging out...User {Session.currentClient.name}");
 
-                        clientManager.currentClient.loggedIn = false;
+                        Session.currentClient.loggedIn = false;
                         client_running = false;
                         //StartMenu();
                         break;

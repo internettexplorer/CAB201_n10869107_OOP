@@ -16,7 +16,8 @@ Questions for Monday
 -- Find out whether any support sessions are being run this week. I need it..
 
 1. Do we have to represent every class in our code in the class diagram? 
-2. Is my code structure in alignment with OOP design? Specifically -- Client class with attributes, then a ClientManager with the methods. Is there a more compact way to do this? 
+2. Is my code structure in alignment with OOP design? Specifically -- use of static Session class to store data
+3. Where to use virtual methods? Where is extension possible? 
 
 -------
 

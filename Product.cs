@@ -1,6 +1,8 @@
 using System;
 using System.Collections.Generic;
 
+using InitialiseApp;
+
 namespace Products
 {
     public class Product
@@ -9,20 +11,19 @@ namespace Products
         public string type {get; set;}
         public int initialCost {get; set;}
 
-        // public int id ??
+        public Guid prodCreatorID {get; private set;}
 
         public Product(string name, string type, int initialCost)
         {
             this.name = name;
             this.type = type;
             this.initialCost = initialCost;
+            this.prodCreatorID = Session.currentClient.clientID; // could be problematic later on??
         }
     }
 
     public class ProductManager
     {
-        List<Product> productList = new List<Product>();
-
         public void Advertise()
         {
             Console.Write("\nProduct type: ");
@@ -40,7 +41,7 @@ namespace Products
                 
                 Product newProduct = new Product(inputProdName, inputProdType, inputCost);
 
-                productList.Add(newProduct);
+                Session.productList.Add(newProduct);
 
                 Console.WriteLine($"\nSuccessfully added {newProduct.type} '{newProduct.name}' starting at ${newProduct.initialCost}");
             }

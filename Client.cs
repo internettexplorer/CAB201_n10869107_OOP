@@ -2,12 +2,12 @@ using System;
 using System.Collections.Generic;
 
 using UI;
+using InitialiseApp;
 
 namespace Clients
 {
     public class Client
     {
-        
         public string name {get; set;}
         public string email {get; set;}
         public string pwd {get; set;}
@@ -15,7 +15,6 @@ namespace Clients
         public Guid clientID {get; private set;}
 
         public bool loggedIn;
-    
         // eventually want to have support for products and bid (classes?) in this class
 
         public Client(string name, string email, string pwd, string address) 
@@ -31,8 +30,6 @@ namespace Clients
     public class ClientManager
     {
         // Storage of User class instances 
-        public List<Client> clientData = new List<Client>();
-        public Client currentClient;
         public int index;
 
         public void Register()
@@ -51,7 +48,7 @@ namespace Clients
 
             Client newClient = new Client(inputName, inputEmail, inputPwd, inputAddress);
 
-            clientData.Add(newClient);
+            Session.clientData.Add(newClient);
 
             Console.Clear();
 
@@ -79,27 +76,27 @@ namespace Clients
                 // exits the loop.
                 try
                 {
-                    index = clientData.FindIndex(c => c.email.Equals(loginEmail, StringComparison.Ordinal));
-                    currentClient = clientData[index];
+                    index = Session.clientData.FindIndex(c => c.email.Equals(loginEmail, StringComparison.Ordinal));
+                    Session.currentClient = Session.clientData[index];
                     
-                    if (loginEmail == currentClient.email && loginPwd == currentClient.pwd)
+                    if (loginEmail == Session.currentClient.email && loginPwd == Session.currentClient.pwd)
                     {
                         Console.Clear();
-                        Console.WriteLine($"Welcome back {currentClient.name}");
-                        Console.WriteLine($"{currentClient.name}: {index}"); // debugging purposes
+                        Console.WriteLine($"Welcome back {Session.currentClient.name}");
+                        Console.WriteLine($"{Session.currentClient.name}: {index}"); // debugging purposes
 
-                        currentClient.loggedIn = true;
+                        Session.currentClient.loggedIn = true;
                         
                         loginAttempt = false;
                     }
                     else
                     {
-                        Console.Write(PWD_ERR);
+                        Console.Write($"{PWD_ERR}\n");
                     }
                 }
                 catch (ArgumentOutOfRangeException)
                 {
-                    Console.Write(EMAIL_ERR);
+                    Console.Write($"{EMAIL_ERR}\n");
                 }
             }
         }
