@@ -1,22 +1,13 @@
 using System;
-using System.Collections.Generic;
-
 using Clients;
 using Products;
 using UI;
 
 namespace InitialiseApp
 {
-    public static class Session
-    {
-        public static List<Client> clientData = new List<Client>();
-        public static List<Product> productList = new List<Product>();
-        public static Client currentClient;
-
-    }
     public class App
     {
-        ClientManager clientManager = new ClientManager();
+        Authenticator Auth = new Authenticator();
         ProductManager productManager = new ProductManager();
 
         public void StartMenu()
@@ -44,11 +35,11 @@ namespace InitialiseApp
                 switch (option)
                 {
                     case REGISTER:
-                        clientManager.Register();
+                        Auth.Register();
                         break;
 
                     case LOGIN:
-                        clientManager.Login();
+                        Auth.Login();
 
                         if (Session.currentClient.loggedIn == true)
                         {
@@ -94,7 +85,7 @@ namespace InitialiseApp
                         break;
                     case PROD_LIST:
                         // Product.List();
-                        Console.Write("Prod list success");
+                        productManager.GetProducts();
                         break;
                     case BID_LIST:
                         Console.Write("Bid list success");
@@ -105,11 +96,11 @@ namespace InitialiseApp
                     case LOGOUT:
                         Console.Clear();
 
-                        Console.WriteLine($"\nLogging out...User {Session.currentClient.name}");
+                        Console.WriteLine($"\nLogging {Session.currentClient.name} out...");
 
                         Session.currentClient.loggedIn = false;
                         client_running = false;
-                        //StartMenu();
+                        
                         break;
                     default: break;
                 }
