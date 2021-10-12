@@ -1,5 +1,4 @@
-﻿using System;
-using InitialiseApp;
+﻿using InitialiseApp;
 
 namespace Main
 {

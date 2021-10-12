@@ -10,7 +10,12 @@ namespace Bids
     public class BidMaker : IProduct
     {
         List<Product> tempProdList = new List<Product>();
+
+        Product bidProduct;
         string userInputType;
+        int inputBidAmt;
+        int inputDeliveryOption;
+        bool delivery;
 
         public void GetProducts()
         {
@@ -38,7 +43,7 @@ namespace Bids
                 Console.WriteLine(SEARCH_FAIL);
             }
 
-            Console.WriteLine($"Please select one of the following '{userInputType}' items:\n");
+            Console.WriteLine($"Please select one of the following '{userInputType}' products:\n");
             
             for (int i = 0; i < tempProdList.Count; i++)
             {
@@ -46,17 +51,17 @@ namespace Bids
             }
         }
 
-        public void GetBid()
+        public void GetBidInput()
         {
-            string BID_TOO_LOW = "Bid amount must be greater than the starting cost";
             string BID_PROMPT = "\nEnter bid ($)";
             string DELIVERY = "(1) Home delivery or (2) Click & Collect";
-            int userSelection = UserInterface.GetInt($"\nEnter a number between 1 and {tempProdList.Count}");
+
+            string BID_TOO_LOW = "Bid amount must be greater than the starting cost";
+
+            int userSelection = UserInterface.GetInt("\nSelection");
             int selectionIndex = userSelection - 1;
 
-            Product bidProduct = tempProdList[selectionIndex];
-
-            int inputBidAmt;
+            bidProduct = tempProdList[selectionIndex];
 
             while (true)
             {
@@ -72,8 +77,7 @@ namespace Bids
                 }
             }
 
-            bool delivery;
-            int inputDeliveryOption = UserInterface.GetInt(DELIVERY);
+            inputDeliveryOption = UserInterface.GetInt(DELIVERY);
 
             if (inputDeliveryOption == 1)
             {
@@ -83,13 +87,17 @@ namespace Bids
             {
                 delivery = false;
             }
+        }
 
+        public void AddBid()
+        {
             Bid newBid = new Bid(inputBidAmt, delivery);
             bidProduct.productBids.Add(newBid);
 
-            Console.Write($"Bid of ${newBid.amount} made by {newBid.bidder.name} ({newBid.bidder.email})");
+            Console.Clear();
+            Console.Write($"Bid of ${newBid.amount} made by {newBid.bidder.name} ({newBid.bidder.email})\n");
             
+            tempProdList.Clear();
         }
-
     }
 }

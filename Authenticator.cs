@@ -58,7 +58,6 @@ namespace Clients
                     {
                         Console.Clear();
                         Console.WriteLine($"Welcome back {Session.currentClient.name}");
-                        Console.WriteLine($"{Session.currentClient.name}: {Session.index}"); // debugging purposes
 
                         Session.currentClient.loggedIn = true;
                         

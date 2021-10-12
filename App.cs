@@ -9,7 +9,7 @@ namespace InitialiseApp
     public class App
     {
         Authenticator Auth = new Authenticator();
-        ProductManager productManager = new ProductManager();
+        ProductManager ProductManager = new ProductManager();
 
         public void StartMenu()
         {
@@ -73,23 +73,22 @@ namespace InitialiseApp
                 switch (clientOption)
                 {
                     case ADVERTISE_PROD:
-                        productManager.Advertise();
+                        ProductManager.Advertise();
                         break;
                     case SEARCH_PROD:
-                        productManager.Search();
+                        ProductManager.Search();
                         break;
                     case MAKE_BID:
-                        BidMaker BidMaker = new BidMaker();
-
-                        BidMaker.GetProducts();
-                        BidMaker.DisplayProducts();
-                        BidMaker.GetBid();
+                        ProductManager.MakeBid();
                         break;
                     case PROD_LIST:
-                        productManager.DisplayUserProducts();
+                        ProductManager.DisplayUserProducts();
                         break;
                     case BID_LIST:
-                        Console.Write("Bid list success");
+                        BidViewer BidViewer = new BidViewer();
+
+                        BidViewer.GetProducts();
+                        BidViewer.DisplayProducts();
                         break;
                     case SELL_PROD:
                         Console.Write("Sell success");

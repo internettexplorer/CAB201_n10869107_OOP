@@ -1,8 +1,6 @@
 using System;
-using System.Collections.Generic;
-
 using InitialiseApp;
-using ProductInterface;
+using Bids;
 
 namespace Products
 {
@@ -27,6 +25,7 @@ namespace Products
 
                 Session.productList.Add(newProduct);
 
+                Console.Clear();
                 Console.WriteLine($"\nSuccessfully added {newProduct.type} '{newProduct.name}' starting at ${newProduct.initialCost}");
             }
             catch (FormatException)
@@ -43,12 +42,22 @@ namespace Products
             Viewer.DisplayProducts();
         }
 
-        public virtual void Search()
+        public void Search()
         {
             ProductSearcher Searcher = new ProductSearcher();
             
             Searcher.GetProducts();
             Searcher.DisplayProducts();
+        }
+
+        public void MakeBid()
+        {
+            BidMaker BidMaker = new BidMaker();
+
+            BidMaker.GetProducts();
+            BidMaker.DisplayProducts();
+            BidMaker.GetBidInput();
+            BidMaker.AddBid();
         }
     }
 }

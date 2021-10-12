@@ -1,13 +1,15 @@
 using System;
-using System.Collections.Generic;
 using InitialiseApp;
-
 using ProductInterface;
 
 namespace Products
 {
     public class ProductViewer : IProduct
     {
+        void IProduct.DisplayProducts()
+        {
+            this.DisplayProducts();
+        }
         public void GetProducts()
         {
             foreach (var product in Session.productList)
@@ -19,7 +21,7 @@ namespace Products
             }
         }
 
-        public void DisplayProducts()
+        protected internal virtual void DisplayProducts()
         {
             string NO_PRODUCTS = "You have no products available for sale right now.\n";;
 
