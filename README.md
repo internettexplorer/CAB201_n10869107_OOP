@@ -57,20 +57,25 @@ Products have: name, type, cost, userID
 
 Advertise() adds a product to the session-wide ProductList
 
+Abstracted functions: IProduct() / virtual
+GetProducts() : get and store in list
+DisplayProducts() : show as formatted list
+
+
 listing products for sale: ListProducts()
     ProductList: get products where currentClient.id = userID (equality check)
     Store products in temporary userProducts list (list.Add)
     Display user products by looping through list (for)
 
-Searching for products: Search()
+searching for products: Search()
     :: string inputProdType 
     Prompt user for product type to search for
     ProductList: get products where the inputProdType == product.type (foreach?)
     Store matching products in temporary returnProdSearch list (list.Add)
     Display product search results by looping through list (for)
 
-Bidding: -> is this where virtual methods can be used?? Bid()
-    :: bidAmount, bidderID || biddername, bidderemail? 
+bidding: -> is this where virtual methods can be used?? Bid()
+    Bid :: bidAmount, bidderID || biddername, bidderemail? 
 
     Product HAS- bid, each Product instance contains a list of Bids.
     Expressed in the Product class as a list field. 
@@ -79,12 +84,18 @@ Bidding: -> is this where virtual methods can be used?? Bid()
     Same as Search method: get products with matching types, store in temp list
     Display enumerated list of products
     Prompt user for integer selection (what product to bid for)
-    Prompt user for bid amount 
+    Prompt user for bid amount
+    Prompt user to y/n click & collect or home delivery
 
     Create Bid instance
     Instantiate Bid class with bid amount and bidder details from currently logged in user (currentClient).
     Add bid to List<Bid> of that Product
-    
+
+    maybe override 
+selling: Sell()
+    Transaction :: house charge, taxpayable
+
+
 
 
 

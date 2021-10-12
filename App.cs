@@ -67,8 +67,7 @@ namespace InitialiseApp
             {
                 int clientOption = UserInterface.GetOption("\nProceed by choosing from the following:",
                     "Advertise a product", "Search for a product", "Make a bid", "View my products for sale", "View bids on my products",
-                    "Sell a product", "Logout"
-                    );
+                    "Sell a product", "Logout");
                 
                 switch (clientOption)
                 {
@@ -84,8 +83,8 @@ namespace InitialiseApp
                         Console.Write("Bid success");
                         break;
                     case PROD_LIST:
-                        // Product.List();
                         productManager.GetProducts();
+                        productManager.ListProducts();
                         break;
                     case BID_LIST:
                         Console.Write("Bid list success");
@@ -97,6 +96,8 @@ namespace InitialiseApp
                         Console.Clear();
 
                         Console.WriteLine($"\nLogging {Session.currentClient.name} out...");
+
+                        productManager.userProducts.Clear();
 
                         Session.currentClient.loggedIn = false;
                         client_running = false;
