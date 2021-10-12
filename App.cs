@@ -1,6 +1,7 @@
 using System;
 using Clients;
 using Products;
+using Bids;
 using UI;
 
 namespace InitialiseApp
@@ -75,16 +76,17 @@ namespace InitialiseApp
                         productManager.Advertise();
                         break;
                     case SEARCH_PROD:
-                        // Product.Search();
-                        Console.Write("Search success");
+                        productManager.Search();
                         break;
                     case MAKE_BID:
-                        // Product.Bid();
-                        Console.Write("Bid success");
+                        BidMaker BidMaker = new BidMaker();
+
+                        BidMaker.GetProducts();
+                        BidMaker.DisplayProducts();
+                        BidMaker.GetBid();
                         break;
                     case PROD_LIST:
-                        productManager.GetProducts();
-                        productManager.ListProducts();
+                        productManager.DisplayUserProducts();
                         break;
                     case BID_LIST:
                         Console.Write("Bid list success");
@@ -97,7 +99,7 @@ namespace InitialiseApp
 
                         Console.WriteLine($"\nLogging {Session.currentClient.name} out...");
 
-                        productManager.userProducts.Clear();
+                        Session.userProducts.Clear();
 
                         Session.currentClient.loggedIn = false;
                         client_running = false;

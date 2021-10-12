@@ -8,6 +8,8 @@ namespace InitialiseApp
     {
         public static List<Client> clientData = new List<Client>();
         public static List<Product> productList = new List<Product>();
+
+        public static List<Product> userProducts = new List<Product>();
         public static Client currentClient;
         public static int index;
     }

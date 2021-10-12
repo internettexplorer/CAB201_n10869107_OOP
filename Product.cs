@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 
 using InitialiseApp;
+using Bids;
 
 namespace Products
 {
@@ -12,6 +13,8 @@ namespace Products
         public int initialCost {get; set;}
 
         public Guid prodCreatorID {get; private set;}
+
+        public List<Bid> productBids = new List<Bid>();
 
         public Product(string name, string type, int initialCost)
         {
